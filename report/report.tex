@@ -1,11 +1,10 @@
 \documentclass{article}
 
-
-
-\usepackage[latin1]{inputenc}
 \usepackage{color}
 \usepackage{minted} 
+\usepackage{amsmath}
 
+\pagestyle{plain} 
 
 \begin{document}
     \title{Proyecto de Probabilidades} 
@@ -21,7 +20,7 @@
     \paragraph{Respuesta} 
 
     Aqui voy a usar una distribucion binamial geom\'etrica  pues si defino la v.a.d como 
-    el numero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
+    el n\'umero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
     que todos los eventos suceden con probabilidad $p$ y la probabilidad en cada una de 
     los ensayos es la misma 
 
@@ -57,5 +56,60 @@
     
             
 
-	
+
+
+
+    \section*{Ejercicio 3 Clase Pr\'actica 7}
+
+    El tiempo (en horas) que se requiere para que se requiere para repara una m\'aquina es una v.a 
+    que sigue una distribucion exponencial con parametro $ \lambda = \frac{1}{2} $ Calcule: 
+    \begin{enumerate}
+        \item La probabilidad de que el tiempo de reparacion exceda las 2 horas 
+        \item La probabilidad de que la reparacion dure al menos 10 horas dado que se conoce que
+         la duracion excede las 9 horas 
+    \end{enumerate} 
+    
+    {\bf Respuesta 1 } 
+
+    Como el problema sigue una distribucion exponencial entonces su funci\'on de desidad es : 
+
+    
+    \begin{equation*}
+        f(x)=\begin{cases}
+            \lambda e^{-\lambda x }  & \mbox{si $x>0$,}
+            \\
+            0                        & \mbox{si $x\le 0$.}
+            \end{cases}
+    \end{equation*}
+
+    La probabilidad de que el tiempo de duracion exceda las 2 horas se 
+    puede obtener primero calculando la probabilidad de que el tiempo de 
+    duracion no exceda las 2 horas  y eso esta dado por $P \left(X \le x\right)$. 
+    Como la integral es el area bajo la y la funcion $f\left(x\right) $ es positiva 
+    entonces : 
+    
+
+
+    \begin{equation*}
+        \begin{matrix}
+            P \left(X \le 2 \right) & = & \int_{ - \infty   }^{2}  f\left(t\right)\,\mathrm{d}t
+            \\\\
+                                    & = & \int_{0 }^{2}  \lambda e^{- \lambda t}\,\mathrm{d}t
+            \\\\
+                                    & = & \int_{0 }^{2}  \frac{1}{2} e^{- \frac{t}{2} }\,\mathrm{d}t
+            \\\\
+                                    & = & \frac{1}{2} \left[2 \left(1-\frac{1}{e}\right)\right]
+            \\\\
+                                    & = & 1 - \frac{1}{e}
+        \end{matrix}
+    \end{equation*}
+    
+
+    Luego la probabilidad de que el tiempo de duracion exceda las 2 horas es : 
+
+    \begin{equation*}
+        P \left(X > 2 \right) = 1 - \left(1 - \frac{1}{e}\right)  = \frac{1}{e} 
+    \end{equation*}
+
+
 \end{document}

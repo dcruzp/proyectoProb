@@ -12,7 +12,7 @@
 	\date{\today}    
     \maketitle
     
-    \section*{Ejercicio 2 }  
+    \section*{Ejercicio 1 Inciso b }  
     {\bf Una persona conocer\'a pretendientes hasta encontrar su pareja ideal y
     casarse. Si al conocer a un pretendiente, la probabilidad de que sea su pareja ideal
     es p. Simule la cantidad de pretendientes que debe conocer hasta casarse.}
@@ -70,7 +70,6 @@
     \end{enumerate} 
     
     {\bf Respuesta 1 } 
-
     Como el problema sigue una distribucion exponencial entonces su funci\'on de desidad es : 
 
     
@@ -112,4 +111,110 @@
     \end{equation*}
 
 
+    {\bf Respuesta 2 } 
+
+    Aqui hay que hallar la probabilidad de que suceda un evento $A$ dado que sucede otro $B$.
+    Esto es probabilidad condicional definimos los sucesos de la siguiente forma :
+
+    \begin{itemize}
+        \item que la duracion exceda las 9 horas (Suceso A )
+        \item que la duracion exceda las 10 horas (Suceso B)
+    \end{itemize}
+    
+    Para calcular hallar la probabilidad de $B$ dado $A$ usamos Bayer
+    
+    \begin{equation*}
+        P \left(B | A  \right) = \frac{P \left(AB\right)}{P\left(A\right)}
+    \end{equation*}
+
+    Para calcular el suceso $A$ 
+
+    \begin{equation*}
+        P\left(A \right) = P \left(x > 9 \right) = 1 - P \left(X \le 9 \right)
+    \end{equation*}
+
+    \begin{equation*}
+        \begin{array}{rcl}
+            P \left(x \le 9 \right) &  =  & \int_{0}^{9} f\left(t\right) \,\mathrm{d}t 
+            \\
+            \\
+                                    &  =  & \int_{0}^{9} \lambda e^{- \lambda t}  \,\mathrm{d}t 
+            \\
+            \\
+                                    &  =  & - e ^{-\lambda t } |_{0}^{9} 
+            \\
+            \\
+                                    & = & -e^{- \lambda \left(9\right)} - \left[e^{-  \lambda \left(0\right) }\right]
+            \\
+            \\
+                                    & = & -e^{-9 \lambda} + 1   
+            \\
+            \\
+                                    & = & 1 - e^{-9 \lambda}   
+            \\
+            \\
+                                    & = & 1 - e^{\frac{-9}{2}}  \mbox{ sustituyendo  $ \lambda = \frac{1}{2}$}
+        \end{array}
+    \end{equation*}
+
+    Luego podemos obtener la probabilidad de que la duracion exceda las 9 horas 
+    
+    \begin{equation*}
+        P \left(X > 9 \right) = 1 -  P \left(X \le 9 \right)  = 1 - 1 + e^{\frac{-9}{2}} = e^{\frac{-9}{2}}
+    \end{equation*}
+
+    Ahora calculamos el suceso $B$ . Aqui hacemos lo mismo que para el suceso $A$ y obtenemos que 
+
+    \begin{equation*}
+        P \left(X > 10 \right) = 1 -  P \left(X \le 10 \right)  = 1 - 1 + e^{-5} = e^{-5}
+    \end{equation*}
+
+    Ahora tenemos que la probabilidad de $P \left(AB\right) = P \left(B\right) = e^{-5}$
+    y podemos calcular la probabilidad de $B$ dado $A$ 
+
+    \begin{equation*}
+        P \left(B|A\right) = \frac{e^{-5}}{e^{-\frac{9}{2}}} = e^{-5 + \frac{9}{2}}  = e^{-\frac{1}{2}}
+    \end{equation*}
+
+    La probabilidad de que la reparaci\'on dure al menos 10 horas dado que se conoce
+    que la duraci\'on excede las 9 horas es $e^{-\frac{1}{2}}$
+
+    \section*{Ejercicio 3 Clase Practica 8}
+
+    Sea  $x$ un variable aleatoria continua y no negativa .Demuetre que 
+
+    \begin{equation*}
+        EX = \int_{0}^{+ \infty} P \left(X > x \right)  \,\mathrm{d}x 
+    \end{equation*}
+
+    Si $Y$ es una variable aleatoria continua con $fy$ como funcion de densidad .
+    Se tiene : 
+
+    \begin{equation*}
+        \int_{0}^{\infty} P \left(Y > y\right)  \,\mathrm{d}y =  
+        \int_{0}^{\infty} \int_{y}^{\infty}  fy \left(x\right)\,\mathrm{d}x  \,\mathrm{d}y
+    \end{equation*}
+
+    Pero tenemos que  
+
+    \begin{equation*}
+        P \left(Y > y \right) = 
+        \int_{y}^{\infty} fy \left(x\right) \,\mathrm{d}x 
+    \end{equation*}
+
+    Intercambiando el orden de integracion de la funci\'on  anterior tenemos que 
+
+    \begin{equation*}
+        \begin{array}{rcl}
+            \int_{0}^{\infty} P \left(Y > y \right) \,\mathrm{d}y &  =  &  \int_{0}^{\infty} \left(\int_{0}^{x}  \,\mathrm{d}y \right) fy\left(x\right) \,\mathrm{d}x 
+            \\
+            \\
+                                                                  &  =  &  \int_{0}^{\infty} x fy\left(x\right) \,\mathrm{d}x
+            \\
+            \\
+                                                                  &  =  &  E\left[Y\right]                                           
+        \end{array}
+    \end{equation*}
+
+    \paragraph{Nota:} La demostraci\'on de este ejercicio esta en el "Ross A First Course in Probability $8^{th}$ edition"  p\'agina 195 capitulo 5
 \end{document}

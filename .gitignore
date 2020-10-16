@@ -1,0 +1,15 @@
+*.png 
+.vscode/
+#*.log 
+#*.pdf 
+#*fls
+#*.aux 
+#*.fdb_latexmk
+#report/_minted-report
+#*.synctex.gz
+
+report/*
+!report/*.tex
+
+
+

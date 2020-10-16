@@ -1,0 +1,61 @@
+\documentclass{article}
+
+
+
+\usepackage[latin1]{inputenc}
+\usepackage{color}
+\usepackage{minted} 
+
+
+\begin{document}
+    \title{Proyecto de Probabilidades} 
+	\author{Daniel de la Cruz Prieto}
+	\date{\today}    
+    \maketitle
+    
+    \section*{Ejercicio 2 }  
+    {\bf Una persona conocer\'a pretendientes hasta encontrar su pareja ideal y
+    casarse. Si al conocer a un pretendiente, la probabilidad de que sea su pareja ideal
+    es p. Simule la cantidad de pretendientes que debe conocer hasta casarse.}
+    
+    \paragraph{Respuesta} 
+
+    Aqui voy a usar una distribucion binamial geom\'etrica  pues si defino la v.a.d como 
+    el numero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
+    que todos los eventos suceden con probabilidad $p$ y la probabilidad en cada una de 
+    los ensayos es la misma 
+
+    \begin{equation}
+        P \left(X = x \right) = p \left(1-p\right)^{k-1} 
+    \end{equation}
+
+
+    \begin{minted}[linenos = true , frame = lines , framesep  = 5mm , label = Generar la distribucion Binomial Geometrica ]{Python} 
+    import matplotlib.pyplot as plt 
+    import numpy as np 
+    from scipy import stats 
+    #import seaborn as sns 
+
+    #Graficando geometrica 
+    p = 0.3 # paramtro de forma 
+
+    geometrica  = stats.geom(p); 
+
+    x = np.arange(geometrica.ppf(0.01) , geometrica.ppf(0.99))
+    print(x) 
+    fmp = geometrica.pmf(x); #Funcion de masa de probabilidad 
+
+    plt.plot(x , fmp , '--'); 
+    plt.vlines(x,0,fmp , colors ='b' , lw = 5 , alpha = 0.3) 
+
+    plt.title ( 'Distribucion Geometrica con parametro  p = 0.5 '  )
+    plt.ylabel ('P (X = x)') 
+    plt.xlabel ('(X = x)')
+    plt.savefig('gafica1b.png')
+    plt.show() 
+    \end{minted}
+    
+            
+
+	
+\end{document}

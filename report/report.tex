@@ -13,50 +13,120 @@
 	\date{\today}    
     \maketitle
     
-    \section*{Ejercicio 1 Inciso b }  
-    {\bf Una persona conocer\'a pretendientes hasta encontrar su pareja ideal y
-    casarse. Si al conocer a un pretendiente, la probabilidad de que sea su pareja ideal
-    es p. Simule la cantidad de pretendientes que debe conocer hasta casarse.}
-    
-    \paragraph{Respuesta} 
-
-    Aqui voy a usar una distribucion binamial geom\'etrica  pues si defino la v.a.d como 
-    el n\'umero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
-    que todos los eventos suceden con probabilidad $p$ y la probabilidad en cada una de 
-    los ensayos es la misma 
-
-    \begin{equation}
-        P \left(X = x \right) = p \left(1-p\right)^{k-1} 
-    \end{equation}
 
 
-    \begin{minted}[linenos = true , frame = lines , framesep  = 5mm , label = Generar la distribucion Binomial Geometrica ]{Python} 
-    import matplotlib.pyplot as plt 
-    import numpy as np 
-    from scipy import stats 
-    #import seaborn as sns 
+    \section*{Ejercicio 1 inciso a}
 
-    #Graficando geometrica 
-    p = 0.3 # paramtro de forma 
+    \begin{flushleft}
+        {\bf Se realizan n llamadas telef\'onicas independientes en un mismo d\'ia, simule
+        el tiempo total de duraci\'on de las llamadas.}
 
-    geometrica  = stats.geom(p); 
+        Para la simulacion de este caso vamos a utilizar una variable aleatoria continua con 
+        distribucion Gamma $X  $ que se utiliza para simular una variable aleatoria continua con 
+        distribuci\'on exponencial , que se utiliza para simular los tiempos de vida de un 
+        sistema determinado , en este caso en particular es la duracion de cada una de las llamadas. 
 
-    x = np.arange(geometrica.ppf(0.01) , geometrica.ppf(0.99))
-    print(x) 
-    fmp = geometrica.pmf(x); #Funcion de masa de probabilidad 
+        \begin{center}
+            \begin{tabular}{|l|c|r|}
+                \hline
+                \multicolumn{3}{|c|}{Resultados de la simulaci\'on}\\
+                \hline
+                \hline
+                $\varGamma \left(\lambda , \alpha\right) $ & $EX$ & promedio \\
+                \hline
+                $\varGamma \left(\frac{1}{2} , 30\right) $ & 60& $60.1532373091$  \\
+                \hline 
+                $\varGamma \left(\frac{1}{4} , 20\right) $ & 80& $80.148902903$  \\
+                \hline
+                $\varGamma \left(\frac{1}{6} , 10\right) $ & 60& $59.7998983886$ \\
+                \hline
+                $\varGamma \left(\frac{1}{8} , 36\right) $ & 288 & $290.06879581$  \\
+                \hline
+            \end{tabular}
+        \end{center}
 
-    plt.plot(x , fmp , '--'); 
-    plt.vlines(x,0,fmp , colors ='b' , lw = 5 , alpha = 0.3) 
+        Los resultados de la tabla anterior se obtuvieron de codigo de python siguiente : 
 
-    plt.title ( 'Distribucion Geometrica con parametro  p = 0.5 '  )
-    plt.ylabel ('P (X = x)') 
-    plt.xlabel ('(X = x)')
-    plt.savefig('gafica1b.png')
-    plt.show() 
-    \end{minted}
-    
+        \begin{minted}{Python}
+            import numpy as np 
+            import random as rdm
+
+            def exponencial (l):
+                U = rdm.random()   
+                return -1 / l * np.log(U) 
+
+            def gammasimulation (l , n ): # lambda , numero de llamadas
+                total = 0 
+                for i in range (n):
+                    total += exponencial(l)
+                return total     
+
+
+            def media (l,n,s): #lambda , numero de llamadas , cant de simulaciones
+                promedio = 0 ;
+                for i in range (s):
+                    promedio += gammasimulation(l,n)
+                return promedio / s     
+
+            s = 1000 # numero de simulaciones 
+
+            table = [[1/2 , 30 , s ],
+                    [1/4 , 20 , s ],
+                    [1/6 , 10 , s ],
+                    [1/8 , 36 , s ],]
+
+        \end{minted}
+    \end{flushleft}
+   
+   
+
+    \section*{Ejercicio 1 inciso b }  
+    \begin{flushleft}
+        
+        
+        {\bf Una persona conocer\'a pretendientes hasta encontrar su pareja ideal y
+        casarse. Si al conocer a un pretendiente, la probabilidad de que sea su pareja ideal
+        es p. Simule la cantidad de pretendientes que debe conocer hasta casarse.}
+        
+        \paragraph{Respuesta} 
+
+        Aqui voy a usar una distribucion binamial geom\'etrica  pues si defino la v.a.d como 
+        el n\'umero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
+        que todos los eventos suceden con probabilidad $p$ y la probabilidad en cada una de 
+        los ensayos es la misma 
+
+        \begin{equation}
+            P \left(X = x \right) = p \left(1-p\right)^{k-1} 
+        \end{equation}
+
+
+        \begin{minted}[linenos = true , frame = lines , framesep  = 5mm , label = Generar la distribucion Binomial Geometrica ]{Python} 
+        import matplotlib.pyplot as plt 
+        import numpy as np 
+        from scipy import stats 
+        #import seaborn as sns 
+
+        #Graficando geometrica 
+        p = 0.3 # paramtro de forma 
+
+        geometrica  = stats.geom(p); 
+
+        x = np.arange(geometrica.ppf(0.01) , geometrica.ppf(0.99))
+        print(x) 
+        fmp = geometrica.pmf(x); #Funcion de masa de probabilidad 
+
+        plt.plot(x , fmp , '--'); 
+        plt.vlines(x,0,fmp , colors ='b' , lw = 5 , alpha = 0.3) 
+
+        plt.title ( 'Distribucion Geometrica con parametro  p = 0.5 '  )
+        plt.ylabel ('P (X = x)') 
+        plt.xlabel ('(X = x)')
+        plt.savefig('gafica1b.png')
+        plt.show() 
+        \end{minted}
+        
             
-
+    \end{flushleft}
 
 
 

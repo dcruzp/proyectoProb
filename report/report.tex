@@ -307,7 +307,7 @@
 
     \end{flushleft}
     
-    \section*{Ejercicio 3 Clase Practica 8}
+    \section*{Ejercicio 3 Clase Pr\'actica 8}
 
     \begin{flushleft}
         
@@ -449,6 +449,7 @@
 
     \section*{Ejercicio 5 Clase Pr\'actica 8} 
 
+
     \begin{flushleft}
         {\bf Un equipo que mide y almacena continuamente la actividad sı\'ismica es colocado
         en una regi\'on remota. El tiempo T , de rotura del equipo sigue una distribuci\'on
@@ -505,5 +506,40 @@
 
     \end{flushleft}
 
+    \section*{Ejercicio 8 inciso a Clase Pr\'actica 8}
+
+    \paragraph{Respuesta}Algoritmo para desarrollar la Variable Aleatoria 
+
+    \begin{minted}{Python}
+        import numpy as np 
+        import math
+        import random as rdm
+
+        def funcionInversa (y , l , a):
+            return (math.log (1-y) / -l)**(1/a)
+
+        def SimulaciondelafuncionInversa (l , a ):
+            Y = rdm.random()
+            return funcionInversa(Y,l,a)
+    \end{minted}
+
+    \section*{Ejercicio 8 inciso b Clase Pr\'actica 8}
+
+    \paragraph{Respuesta}Algoritmo para desarrollar la Variable Aleatoria 
+
+    \begin{minted}{Python}
+        import math
+        import random as rdm
+
+        def funcionInversa (y):
+            if y < 1/2:
+                return 1/2 * math.log(2*y)
+            else :
+                return -0.5 * math.log(-2*y+2) 
+
+
+        def SimulaciondelafuncionInversa ():
+            return funcionInversa(rdm.random())
+    \end{minted}
 
 \end{document}

@@ -13,8 +13,6 @@
 	\date{\today}    
     \maketitle
     
-
-
     \section*{Ejercicio 1 inciso a}
 
     \begin{flushleft}
@@ -32,15 +30,15 @@
                 \multicolumn{3}{|c|}{Resultados de la simulaci\'on}\\
                 \hline
                 \hline
-                $\varGamma \left(\lambda , \alpha\right) $ & $EX$ & promedio \\
+                $X \thicksim \varGamma \left(\lambda , \alpha\right) $ & $EX$ & promedio \\
                 \hline
-                $\varGamma \left(\frac{1}{2} , 30\right) $ & 60& $60.1532373091$  \\
+                $X \thicksim \varGamma \left(\frac{1}{2} , 30\right) $ & 60& $60.1532373091$  \\
                 \hline 
-                $\varGamma \left(\frac{1}{4} , 20\right) $ & 80& $80.148902903$  \\
+                $X \thicksim \varGamma \left(\frac{1}{4} , 20\right) $ & 80& $80.148902903$  \\
                 \hline
-                $\varGamma \left(\frac{1}{6} , 10\right) $ & 60& $59.7998983886$ \\
+                $X \thicksim \varGamma \left(\frac{1}{6} , 10\right) $ & 60& $59.7998983886$ \\
                 \hline
-                $\varGamma \left(\frac{1}{8} , 36\right) $ & 288 & $290.06879581$  \\
+                $X \thicksim \varGamma \left(\frac{1}{8} , 36\right) $ & 288 & $290.06879581$  \\
                 \hline
             \end{tabular}
         \end{center}
@@ -62,19 +60,11 @@
                 return total     
 
 
-            def media (l,n,s): #lambda , numero de llamadas , cant de simulaciones
+            def media (l,n,s): #lambda , #llamads  , simulaciones 
                 promedio = 0 ;
                 for i in range (s):
                     promedio += gammasimulation(l,n)
                 return promedio / s     
-
-            s = 1000 # numero de simulaciones 
-
-            table = [[1/2 , 30 , s ],
-                    [1/4 , 20 , s ],
-                    [1/6 , 10 , s ],
-                    [1/8 , 36 , s ],]
-
         \end{minted}
     \end{flushleft}
    
@@ -88,46 +78,109 @@
         casarse. Si al conocer a un pretendiente, la probabilidad de que sea su pareja ideal
         es p. Simule la cantidad de pretendientes que debe conocer hasta casarse.}
         
-        \paragraph{Respuesta} 
-
+        \paragraph{Respuesta}
         Aqui voy a usar una distribucion binamial geom\'etrica  pues si defino la v.a.d como 
         el n\'umero de ensayos necesarios hasta que se obtiene el primer \'exito . Ademas de 
         que todos los eventos suceden con probabilidad $p$ y la probabilidad en cada una de 
         los ensayos es la misma 
 
-        \begin{equation}
-            P \left(X = x \right) = p \left(1-p\right)^{k-1} 
-        \end{equation}
 
+        \begin{center}
+            \begin{tabular}{|l|c|r|}
+                \hline
+                \multicolumn{3}{|c|}{Resultados de la simulaci\'on}\\
+                \hline
+                \hline
+                $X  \thicksim  Geo \left(\lambda\right) $ & $EX$ & promedio \\
+                \hline
+                $X  \thicksim  Geo \left(\frac{1}{2}\right) $ & 2& $2.013$  \\
+                \hline 
+                $X  \thicksim  Geo \left(\frac{1}{3}\right) $ & 3 & $3.021$  \\
+                \hline
+                $X  \thicksim  Geo \left(\frac{1}{4}\right) $ & 4 & $3.98$ \\
+                \hline
+                $X  \thicksim  Geo \left(\frac{1}{5}\right) $ & 5 & $4.965$  \\
+                \hline
+            \end{tabular}
+        \end{center}
 
-        \begin{minted}[linenos = true , frame = lines , framesep  = 5mm , label = Generar la distribucion Binomial Geometrica ]{Python} 
-        import matplotlib.pyplot as plt 
-        import numpy as np 
-        from scipy import stats 
-        #import seaborn as sns 
+        Los valore de la tabla anterior fueron obtenidos con el codigo en python siguiente 
 
-        #Graficando geometrica 
-        p = 0.3 # paramtro de forma 
-
-        geometrica  = stats.geom(p); 
-
-        x = np.arange(geometrica.ppf(0.01) , geometrica.ppf(0.99))
-        print(x) 
-        fmp = geometrica.pmf(x); #Funcion de masa de probabilidad 
-
-        plt.plot(x , fmp , '--'); 
-        plt.vlines(x,0,fmp , colors ='b' , lw = 5 , alpha = 0.3) 
-
-        plt.title ( 'Distribucion Geometrica con parametro  p = 0.5 '  )
-        plt.ylabel ('P (X = x)') 
-        plt.xlabel ('(X = x)')
-        plt.savefig('gafica1b.png')
-        plt.show() 
+        \begin{minted}{Python} 
+            import numpy as np 
+            import random as rdm 
+            
+            def Bernoulli (p):
+                U = rdm.random() 
+                if U <= p :
+                    return 1 
+                else:
+                    return 0
+            
+            def GeometricSimulation (p):
+                count = 1
+                while Bernoulli(p) != 1 :
+                    count = count +1 
+                return count 
+            
+            def promedio (p , n ):
+                promedio = 0 
+                for i in range(n):
+                    promedio += GeometricSimulation(p) 
+                return promedio /n    
         \end{minted}
         
             
     \end{flushleft}
 
+
+
+    \section*{Ejercicio 1 inciso c }
+    
+    \begin{flushleft}
+        {\bf Asuma que la cantidad media de mensajes que env\'ia una persona en un
+        dı\'ia tiene forma de campana de Gauss. Esto significa que la probabilidad de que envı\'ie
+        pocos o muchos mensajes es baja. Simule la cantidad media de mensajes enviados. }
+
+
+        \paragraph{Respuesta }En este caso vamos a usar una variable aleatoria con distribucion Normal .
+        Como lo que se quiere es conocer la cantidad media de mensajes en un d\'ia y Esto se representa con 
+        Campana de Gauss , que se utiliza para encontrar la media 
+
+        
+        Para la simulacion halle el promedio de 1000 simulaciones con $\mu = 1 $ $ \sigma = 3$ para un 
+        valor esperado de 1 y obtuve un promedio de $1.04345015085$
+
+        Los datos los obtuve utilizando el codigo en python de abajo 
+
+
+        \begin{minted}{Python}
+            import random as rdm
+            import numpy as np  
+            import math
+
+
+            def exponencial (l):
+                U = rdm.random()   
+                return -1 / l * np.log(U) 
+
+            def simulacionNormal (miu , sigma ):
+                U = rdm.random()
+                Y = exponencial(1) 
+
+            
+                while U > math.pow(math.e , (-1)*(math.pow(Y-1,2)/2)):
+                    U = rdm.random() 
+                    Y = exponencial(1) 
+
+                U2 = rdm.random(); 
+
+                if U2 > 0.5:
+                    Y = -Y
+
+                return (Y * sigma) + miu    
+        \end{minted}
+    \end{flushleft}
 
 
     \section*{Ejercicio 3 Clase Pr\'actica 7}

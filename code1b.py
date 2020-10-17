@@ -1,22 +1,27 @@
-import matplotlib.pyplot as plt 
 import numpy as np 
-from scipy import stats 
-#import seaborn as sns 
+import random as rdm 
 
-#Graficando geometrica 
-p = 0.3 # paramtro de forma 
+def Bernoulli (p):
+    U = rdm.random() 
+    if U <= p :
+        return 1 
+    else:
+        return 0
 
-geometrica  = stats.geom(p); 
+def GeometricSimulation (p):
+    count = 1
+    while Bernoulli(p) != 1 :
+        count = count +1 
+    return count 
 
-x = np.arange(geometrica.ppf(0.01) , geometrica.ppf(0.99))
-print(x) 
-fmp = geometrica.pmf(x); #Funcion de masa de probabilidad 
+def promedio (p , n ):
+    promedio = 0 
+    for i in range(n):
+        promedio += GeometricSimulation(p) 
+    return promedio /n          
 
-plt.plot(x , fmp , '--'); 
-plt.vlines(x,0,fmp , colors ='b' , lw = 5 , alpha = 0.3) 
+n = 1000   #numero de simulaciones 
+table = [1/2,1/3,1/4,1/5] 
 
-plt.title ( 'Distribucion Geometrica con parametro  p = 0.5 '  )
-plt.ylabel ('P (X = x)') 
-plt.xlabel ('(X = x)')
-plt.savefig('gafica1b.png')
-plt.show() 
+for x in table: 
+    print ('landa ' + str (x) + 'promedio ' + str(promedio(x , n)))

@@ -3,6 +3,7 @@
 \usepackage{color}
 \usepackage{minted} 
 \usepackage{amsmath}
+\usepackage{amssymb} 
 
 \pagestyle{plain} 
 
@@ -61,160 +62,325 @@
 
     \section*{Ejercicio 3 Clase Pr\'actica 7}
 
-    El tiempo (en horas) que se requiere para que se requiere para repara una m\'aquina es una v.a 
-    que sigue una distribucion exponencial con parametro $ \lambda = \frac{1}{2} $ Calcule: 
-    \begin{enumerate}
-        \item La probabilidad de que el tiempo de reparacion exceda las 2 horas 
-        \item La probabilidad de que la reparacion dure al menos 10 horas dado que se conoce que
-         la duracion excede las 9 horas 
-    \end{enumerate} 
+    \begin{flushleft}
+
+        El tiempo (en horas) que se requiere para que se requiere para repara una m\'aquina es una v.a 
+        que sigue una distribucion exponencial con parametro $ \lambda = \frac{1}{2} $ Calcule: 
+        \begin{enumerate}
+            \item La probabilidad de que el tiempo de reparacion exceda las 2 horas 
+            \item La probabilidad de que la reparacion dure al menos 10 horas dado que se conoce que
+            la duracion excede las 9 horas 
+        \end{enumerate} 
+        
+        {\bf Respuesta 1 } 
+        Como el problema sigue una distribucion exponencial entonces su funci\'on de desidad es : 
+
+        
+        \begin{equation*}
+            f(x)=\begin{cases}
+                \lambda e^{-\lambda x }  & \mbox{si $x>0$,}
+                \\
+                0                        & \mbox{si $x\le 0$.}
+                \end{cases}
+        \end{equation*}
+
+        La probabilidad de que el tiempo de duracion exceda las 2 horas se 
+        puede obtener primero calculando la probabilidad de que el tiempo de 
+        duracion no exceda las 2 horas  y eso esta dado por $P \left(X \le x\right)$. 
+        Como la integral es el area bajo la y la funcion $f\left(x\right) $ es positiva 
+        entonces : 
+        
+
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                P \left(X \le 2 \right) & = & \int_{ - \infty   }^{2}  f\left(t\right)\,\mathrm{d}t
+                \\\\
+                                        & = & \int_{0 }^{2}  \lambda e^{- \lambda t}\,\mathrm{d}t
+                \\\\
+                                        & = & \int_{0 }^{2}  \frac{1}{2} e^{- \frac{t}{2} }\,\mathrm{d}t
+                \\\\
+                                        & = & \frac{1}{2} \left[2 \left(1-\frac{1}{e}\right)\right]
+                \\\\
+                                        & = & 1 - \frac{1}{e}
+            \end{array}
+        \end{equation*}
+        
+
+        Luego la probabilidad de que el tiempo de duracion exceda las 2 horas es : 
+
+        \begin{equation*}
+            P \left(X > 2 \right) = 1 - \left(1 - \frac{1}{e}\right)  = \frac{1}{e} 
+        \end{equation*}
+
+
+        {\bf Respuesta 2 } 
+
+        Aqui hay que hallar la probabilidad de que suceda un evento $A$ dado que sucede otro $B$.
+        Esto es probabilidad condicional definimos los sucesos de la siguiente forma :
+
+        \begin{itemize}
+            \item que la duracion exceda las 9 horas (Suceso A )
+            \item que la duracion exceda las 10 horas (Suceso B)
+        \end{itemize}
+        
+        Para calcular hallar la probabilidad de $B$ dado $A$ usamos Bayer
+        
+        \begin{equation*}
+            P \left(B | A  \right) = \frac{P \left(AB\right)}{P\left(A\right)}
+        \end{equation*}
+
+        Para calcular el suceso $A$ 
+
+        \begin{equation*}
+            P\left(A \right) = P \left(x > 9 \right) = 1 - P \left(X \le 9 \right)
+        \end{equation*}
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                P \left(x \le 9 \right) &  =  & \int_{0}^{9} f\left(t\right) \,\mathrm{d}t 
+                \\
+                \\
+                                        &  =  & \int_{0}^{9} \lambda e^{- \lambda t}  \,\mathrm{d}t 
+                \\
+                \\
+                                        &  =  & - e ^{-\lambda t } |_{0}^{9} 
+                \\
+                \\
+                                        & = & -e^{- \lambda \left(9\right)} - \left[e^{-  \lambda \left(0\right) }\right]
+                \\
+                \\
+                                        & = & -e^{-9 \lambda} + 1   
+                \\
+                \\
+                                        & = & 1 - e^{-9 \lambda}   
+                \\
+                \\
+                                        & = & 1 - e^{\frac{-9}{2}}  \mbox{ sustituyendo  $ \lambda = \frac{1}{2}$}
+            \end{array}
+        \end{equation*}
+
+        Luego podemos obtener la probabilidad de que la duracion exceda las 9 horas 
+        
+        \begin{equation*}
+            P \left(X > 9 \right) = 1 -  P \left(X \le 9 \right)  = 1 - 1 + e^{\frac{-9}{2}} = e^{\frac{-9}{2}}
+        \end{equation*}
+
+        Ahora calculamos el suceso $B$ . Aqui hacemos lo mismo que para el suceso $A$ y obtenemos que 
+
+        \begin{equation*}
+            P \left(X > 10 \right) = 1 -  P \left(X \le 10 \right)  = 1 - 1 + e^{-5} = e^{-5}
+        \end{equation*}
+
+        Ahora tenemos que la probabilidad de $P \left(AB\right) = P \left(B\right) = e^{-5}$
+        y podemos calcular la probabilidad de $B$ dado $A$ 
+
+        \begin{equation*}
+            P \left(B|A\right) = \frac{e^{-5}}{e^{-\frac{9}{2}}} = e^{-5 + \frac{9}{2}}  = e^{-\frac{1}{2}}
+        \end{equation*}
+
+        La probabilidad de que la reparaci\'on dure al menos 10 horas dado que se conoce
+        que la duraci\'on excede las 9 horas es $e^{-\frac{1}{2}}$
+
+    \end{flushleft}
     
-    {\bf Respuesta 1 } 
-    Como el problema sigue una distribucion exponencial entonces su funci\'on de desidad es : 
-
-    
-    \begin{equation*}
-        f(x)=\begin{cases}
-            \lambda e^{-\lambda x }  & \mbox{si $x>0$,}
-            \\
-            0                        & \mbox{si $x\le 0$.}
-            \end{cases}
-    \end{equation*}
-
-    La probabilidad de que el tiempo de duracion exceda las 2 horas se 
-    puede obtener primero calculando la probabilidad de que el tiempo de 
-    duracion no exceda las 2 horas  y eso esta dado por $P \left(X \le x\right)$. 
-    Como la integral es el area bajo la y la funcion $f\left(x\right) $ es positiva 
-    entonces : 
-    
-
-
-    \begin{equation*}
-        \begin{matrix}
-            P \left(X \le 2 \right) & = & \int_{ - \infty   }^{2}  f\left(t\right)\,\mathrm{d}t
-            \\\\
-                                    & = & \int_{0 }^{2}  \lambda e^{- \lambda t}\,\mathrm{d}t
-            \\\\
-                                    & = & \int_{0 }^{2}  \frac{1}{2} e^{- \frac{t}{2} }\,\mathrm{d}t
-            \\\\
-                                    & = & \frac{1}{2} \left[2 \left(1-\frac{1}{e}\right)\right]
-            \\\\
-                                    & = & 1 - \frac{1}{e}
-        \end{matrix}
-    \end{equation*}
-    
-
-    Luego la probabilidad de que el tiempo de duracion exceda las 2 horas es : 
-
-    \begin{equation*}
-        P \left(X > 2 \right) = 1 - \left(1 - \frac{1}{e}\right)  = \frac{1}{e} 
-    \end{equation*}
-
-
-    {\bf Respuesta 2 } 
-
-    Aqui hay que hallar la probabilidad de que suceda un evento $A$ dado que sucede otro $B$.
-    Esto es probabilidad condicional definimos los sucesos de la siguiente forma :
-
-    \begin{itemize}
-        \item que la duracion exceda las 9 horas (Suceso A )
-        \item que la duracion exceda las 10 horas (Suceso B)
-    \end{itemize}
-    
-    Para calcular hallar la probabilidad de $B$ dado $A$ usamos Bayer
-    
-    \begin{equation*}
-        P \left(B | A  \right) = \frac{P \left(AB\right)}{P\left(A\right)}
-    \end{equation*}
-
-    Para calcular el suceso $A$ 
-
-    \begin{equation*}
-        P\left(A \right) = P \left(x > 9 \right) = 1 - P \left(X \le 9 \right)
-    \end{equation*}
-
-    \begin{equation*}
-        \begin{array}{rcl}
-            P \left(x \le 9 \right) &  =  & \int_{0}^{9} f\left(t\right) \,\mathrm{d}t 
-            \\
-            \\
-                                    &  =  & \int_{0}^{9} \lambda e^{- \lambda t}  \,\mathrm{d}t 
-            \\
-            \\
-                                    &  =  & - e ^{-\lambda t } |_{0}^{9} 
-            \\
-            \\
-                                    & = & -e^{- \lambda \left(9\right)} - \left[e^{-  \lambda \left(0\right) }\right]
-            \\
-            \\
-                                    & = & -e^{-9 \lambda} + 1   
-            \\
-            \\
-                                    & = & 1 - e^{-9 \lambda}   
-            \\
-            \\
-                                    & = & 1 - e^{\frac{-9}{2}}  \mbox{ sustituyendo  $ \lambda = \frac{1}{2}$}
-        \end{array}
-    \end{equation*}
-
-    Luego podemos obtener la probabilidad de que la duracion exceda las 9 horas 
-    
-    \begin{equation*}
-        P \left(X > 9 \right) = 1 -  P \left(X \le 9 \right)  = 1 - 1 + e^{\frac{-9}{2}} = e^{\frac{-9}{2}}
-    \end{equation*}
-
-    Ahora calculamos el suceso $B$ . Aqui hacemos lo mismo que para el suceso $A$ y obtenemos que 
-
-    \begin{equation*}
-        P \left(X > 10 \right) = 1 -  P \left(X \le 10 \right)  = 1 - 1 + e^{-5} = e^{-5}
-    \end{equation*}
-
-    Ahora tenemos que la probabilidad de $P \left(AB\right) = P \left(B\right) = e^{-5}$
-    y podemos calcular la probabilidad de $B$ dado $A$ 
-
-    \begin{equation*}
-        P \left(B|A\right) = \frac{e^{-5}}{e^{-\frac{9}{2}}} = e^{-5 + \frac{9}{2}}  = e^{-\frac{1}{2}}
-    \end{equation*}
-
-    La probabilidad de que la reparaci\'on dure al menos 10 horas dado que se conoce
-    que la duraci\'on excede las 9 horas es $e^{-\frac{1}{2}}$
-
     \section*{Ejercicio 3 Clase Practica 8}
 
-    Sea  $x$ un variable aleatoria continua y no negativa .Demuetre que 
+    \begin{flushleft}
+        
+    
+        Sea  $x$ un variable aleatoria continua y no negativa .Demuetre que 
 
-    \begin{equation*}
-        EX = \int_{0}^{+ \infty} P \left(X > x \right)  \,\mathrm{d}x 
-    \end{equation*}
+        \begin{equation*}
+            EX = \int_{0}^{+ \infty} P \left(X > x \right)  \,\mathrm{d}x 
+        \end{equation*}
 
-    Si $Y$ es una variable aleatoria continua con $fy$ como funcion de densidad .
-    Se tiene : 
+        Si $Y$ es una variable aleatoria continua con $fy$ como funcion de densidad .
+        Se tiene : 
 
-    \begin{equation*}
-        \int_{0}^{\infty} P \left(Y > y\right)  \,\mathrm{d}y =  
-        \int_{0}^{\infty} \int_{y}^{\infty}  fy \left(x\right)\,\mathrm{d}x  \,\mathrm{d}y
-    \end{equation*}
+        \begin{equation*}
+            \int_{0}^{\infty} P \left(Y > y\right)  \,\mathrm{d}y =  
+            \int_{0}^{\infty} \int_{y}^{\infty}  fy \left(x\right)\,\mathrm{d}x  \,\mathrm{d}y
+        \end{equation*}
 
-    Pero tenemos que  
+        Pero tenemos que  
 
-    \begin{equation*}
-        P \left(Y > y \right) = 
-        \int_{y}^{\infty} fy \left(x\right) \,\mathrm{d}x 
-    \end{equation*}
+        \begin{equation*}
+            P \left(Y > y \right) = 
+            \int_{y}^{\infty} fy \left(x\right) \,\mathrm{d}x 
+        \end{equation*}
 
-    Intercambiando el orden de integracion de la funci\'on  anterior tenemos que 
+        Intercambiando el orden de integracion de la funci\'on  anterior tenemos que 
 
-    \begin{equation*}
-        \begin{array}{rcl}
-            \int_{0}^{\infty} P \left(Y > y \right) \,\mathrm{d}y &  =  &  \int_{0}^{\infty} \left(\int_{0}^{x}  \,\mathrm{d}y \right) fy\left(x\right) \,\mathrm{d}x 
-            \\
-            \\
-                                                                  &  =  &  \int_{0}^{\infty} x fy\left(x\right) \,\mathrm{d}x
-            \\
-            \\
-                                                                  &  =  &  E\left[Y\right]                                           
-        \end{array}
-    \end{equation*}
+        \begin{equation*}
+            \begin{array}{rcl}
+                \int_{0}^{\infty} P \left(Y > y \right) \,\mathrm{d}y &  =  &  \int_{0}^{\infty} \left(\int_{0}^{x}  \,\mathrm{d}y \right) fy\left(x\right) \,\mathrm{d}x 
+                \\
+                \\
+                                                                    &  =  &  \int_{0}^{\infty} x fy\left(x\right) \,\mathrm{d}x
+                \\
+                \\
+                                                                    &  =  &  E\left[Y\right]                                           
+            \end{array}
+        \end{equation*}
 
-    \paragraph{Nota:} La demostraci\'on de este ejercicio esta en el "Ross A First Course in Probability $8^{th}$ edition"  p\'agina 195 capitulo 5
+        \paragraph{Nota:} La demostraci\'on de este ejercicio esta en el "Ross A First Course in Probability $8^{th}$ edition"  p\'agina 195 capitulo 5
+
+    \end{flushleft}
+
+    \section*{Ejercicio 9 Clase Pr\'actica 7} 
+
+    \begin{flushleft}
+            
+        Sea $ X   \thicksim Exp \left(\lambda\right) $  Pruebe que : 
+
+        \begin{equation*}
+            P \left(X-t > x \vert  X > t\right) = P \left(X>x\right),  \hspace*{1.0cm}  x , t \ge 0 
+        \end{equation*}
+
+        Tenemos que:
+        \begin{equation*}
+            P \left(X-t > x \vert  X > t\right) =  P \left(X > x + t\vert  X > t\right)
+        \end{equation*}
+        
+        Ahora por probabilidad condicional tenemos que:
+
+        \begin{equation*}
+            P \left(X-t > x \vert  X > t\right) =  \frac{P \left(\left(X>x +t \right) \cup \left(X > t \right)  \right)}{ P \left(X>t\right)}
+        \end{equation*}
+
+        Por operaciones de conjunto y teniendo en cuenta que $t \ge 0 $ podemos plantear que:
+
+        \begin{equation*}
+            \left(x , \infty \right) \cap \left(x+t , \infty \right)  = \left(x+t , \infty \right)
+        \end{equation*} 
+
+        Ahora nos queda que :
+
+        \begin{equation*}
+            P \left(X-t > x \vert  X > t\right) =  \frac{P \left(X > x +t \right)}{ P \left(X>t\right)}
+        \end{equation*}
+
+        Pero podemos plantear lo siguiente : 
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                P \left(X > x +t \right)  &  =  &  1 - P \left( X \le x+t \right)
+                \\
+                P \left(X > t \right)     &  =  &  1 - P \left( X \le t \right)
+            \end{array} 
+        \end{equation*}
+
+        Luego como sabemos que la funcion de distribucion de la exponencial esta dada por :
+        
+        \begin{equation*}
+            F(x)=\begin{cases}
+                1-  e^{-\lambda x }  & \mbox{si $x>0$,}
+                \\
+                0                    & \mbox{si $x\le 0$.}
+                \end{cases}
+        \end{equation*}
+
+        Pero como $x > 0  $ entonces $F\left(x\right) = 1 - e^{- \lambda x}$ . si sustituimos y tenemos 
+        en cuenta lo anterior nos queda de la siguiente forma la igualdad :
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                P \left(X-t > x \vert  X > t\right)  & = & \frac{1 - P \left(X \le x + t \right)}{1 - P\left(X \le t \right)}
+                \\
+                \\
+                                                    & = & \frac{1 - F \left( x + t \right)}{1 - F\left(t \right)}
+                \\
+                \\
+                                                    & = & \frac{1 - \left[1 - e^{- \lambda \left(x+t\right)}\right]}{1 - \left[1 - e^{- \lambda \left(t\right)}\right]}
+                \\
+                \\
+                                                    & = & \frac{e^{- \lambda \left(x+t\right)}}{e^{- \lambda\left(t\right)}}
+                \\
+                \\
+                                                    & = & e^{- \lambda x}
+                \\
+                \\
+                                                    & = & 1 - \left[1 - e^{- \lambda x}\right]
+                \\
+                \\                                   
+                                                    & = & 1 - F \left(x\right);
+                \\
+                \\
+                                                    & = & P \left( X > x \right)
+            \end{array}        
+        \end{equation*}
+
+        Por lo que tenemos que si $ x,t \ge 0 $: 
+
+        \begin{equation*}
+            P \left(X-t > x \vert  X > t\right) = P \left( X > x \right) 
+        \end{equation*}
+
+        
+            
+    \end{flushleft}
+
+
+
+
+    \section*{Ejercicio 5 Clase Pr\'actica 8} 
+
+    \begin{flushleft}
+        {\bf Un equipo que mide y almacena continuamente la actividad sı\'ismica es colocado
+        en una regi\'on remota. El tiempo T , de rotura del equipo sigue una distribuci\'on
+        exponencial de media 3 años. Dado que el equipo no se revisa en los primeros
+        dos años, el tiempo de detección de rotura es $X = \max (T, 2)$. Determine EX.
+        Sugerencia: Use la f\'ormula del ejercicio 3. }
+
+        \paragraph{Respuesta}
+        Nos dicen que $ET = 3$ pero como el tiempo $T$ de rotura del equipo sigue una
+        distribuci\'on exponencial sabemos que $ET = \frac{1}{\lambda}$  por lo que podemos 
+        obtener tambien que $\lambda = \frac{1}{3}$
+        
+        Del ejercicio 3 de la Clase Pr\'actica 8 tenemos $EX = \int_{0}^{\infty} P\left(X > x\right) \,\mathrm{d}x $ . Usando esto tenemos : 
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                EX  & = &   \int_{0}^{\infty} P \left(X > x \right) \,\mathrm{d}x 
+                \\\\
+                    & = &  \int_{0}^{2} P \left(X > x \right) \,\mathrm{d}x + \int_{2}^{\infty} P \left(X >x \right) \,\mathrm{d}x   
+            \end{array}
+        \end{equation*}
+
+        dado que el tiempo de detecci\'on de rotura esta dado por $X = \max\left(T,2\right)$ y en $\left(0,2\right)$ se cumple siempre que $X>x$
+        por lo que $P\left(X>x\right) = 1 $ 
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                EX  & = &   \int_{0}^{2} P \left(X > x \right) \,\mathrm{d}x + \int_{2}^{\infty} P \left(X >x \right) \,\mathrm{d}x   
+                \\\\
+                    & = &  \int_{0}^{2}  \,\mathrm{d}x + \int_{2}^{\infty} P \left(X >x \right) \,\mathrm{d}x   
+                \\\\
+                    & = &  2 + \int_{2}^{\infty} P \left(X >x \right) \,\mathrm{d}x   
+            \end{array}
+        \end{equation*}
+
+        Podemos comprobar que $X$ no toma valor 2 y adem\'as en el intervalo $\left(2,\infty \right)$ las probabilidades son las mismas 
+        $P \left(X>x \right)  = P \left(T>x \right)$ 
+
+        \begin{equation*}
+            \begin{array}{rcl}
+                EX  & = &   2  + \int_{2}^{\infty} P \left(X >x \right) \,\mathrm{d}x   
+                \\\\
+                    & = &   2 +  \int_{2}^{\infty} \left(1- F \left(x\right)\right) \,\mathrm{d}x 
+                \\\\
+                    & = &   2 +  \int_{2}^{\infty} \left(1- \left(1 - e^{- \lambda x }\right)\right) \,\mathrm{d}x   
+                \\\\
+                    & = &   2 +  \int_{2}^{\infty} \left(1- \left(1 - e^{- \frac{1}{3} x }\right)\right) \,\mathrm{d}x   \hspace*{1.0cm}  \mbox{sustituci\'on de $\lambda = \frac{1}{3}$ }
+                \\\\ 
+                    & = &   2 +  \int_{2}^{\infty} e^{- \frac{1}{3} x } \,\mathrm{d}x 
+                \\\\
+                    & = &   2 + 3 e^{-\frac{2}{3}}
+            \end{array}
+        \end{equation*}
+
+    \end{flushleft}
+
+
 \end{document}
